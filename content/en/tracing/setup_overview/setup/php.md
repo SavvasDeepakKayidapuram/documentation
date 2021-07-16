@@ -431,7 +431,7 @@ To remove the PHP tracer:
 
 ## Troubleshooting an application crash
 
-In the unusual event of an application crash caused by the PHP tracer, typically because of a segmentation fault, the best thing to do is obtain a core dump and contact Datadog support.
+In the unusual event of an application crash caused by the PHP tracer, typically because of a segmentation fault, the best thing to do is obtain a valgrind trace or core dump and contact Datadog support.
 
 ### Obtaining a core dump
 
@@ -450,6 +450,24 @@ If no core dump was generated, check the following configurations and change the
 1. Ensure you have a suitable `rlimit_core` in the PHP-FPM pool configuration section. You can set it to unlimited: `rlimit_core = unlimited`.
 1. Ensure you have a suitable `ulimit` set in your system. You can set it to unlimited: `ulimit -c unlimited`.
 1. If your application runs in a Docker container, changes to `/proc/sys/*` have to be done to the host machine. Contact your system administrator to know the options available to you. If you are able to, try recreating the issue in your testing or staging environments.
+
+### Valgrind trace
+
+Preferably, if you want to give us as many hints as possible, try running the application with valgrind (install it from your package manager). This approach will also work in an unprivileged container (unlike core dumps by default).
+
+   - For CLI this is as simple as executing `USE_ZEND_ALLOC=0 valgrind -- php path/to/script.php`.
+   - When running php-fpm execute `USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- php-fpm -F --fpm-config ...`.
+   - When using apache, execute `(. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`.
+
+### Obtaining a strace
+
+Some issues arise due to external influence, in that case it can be valuable to have a `strace` (install it from your package manager). When providing Datadog support a strace, please make sure to include the `-f` option, to follow child processes as well.
+
+Obtaining the strace for:
+
+  - CLI: `strace -f php path/to/script.php`
+  - apache: `(. /etc/apache2/envvars; strace -f apache2 -X)`
+  - php-fpm: `strace -f php-fpm -F --fpm-config ...`
 
 ## Further Reading
 
