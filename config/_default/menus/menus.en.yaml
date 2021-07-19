@@ -6767,3 +6767,79 @@ api:
         - ListSecurityFilters
       unstable: []
       order: 0
+  - name: Service Accounts
+    url: /api/latest/service-accounts/
+    identifier: service-accounts
+    generated: true
+  - name: Edit an app key owned by this service account
+    url: '#edit-an-app-key-owned-by-this-service-account'
+    identifier: edit-an-app-key-owned-by-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - UpdateServiceAccountApplicationKey
+      unstable: []
+      order: 2
+  - name: Get one app key owned by this service account
+    url: '#get-one-app-key-owned-by-this-service-account'
+    identifier: get-one-app-key-owned-by-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - GetServiceAccountApplicationKey
+      unstable: []
+      order: 1
+  - name: Delete an app key owned by this service account
+    url: '#delete-an-app-key-owned-by-this-service-account'
+    identifier: delete-an-app-key-owned-by-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - DeleteServiceAccountApplicationKey
+      unstable: []
+      order: 3
+  - name: Create an app key for this service account
+    url: '#create-an-app-key-for-this-service-account'
+    identifier: create-an-app-key-for-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateServiceAccountApplicationKey
+      unstable: []
+      order: 0
+  - name: Get all app keys owned by this service account
+    url: '#get-all-app-keys-owned-by-this-service-account'
+    identifier: get-all-app-keys-owned-by-this-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - ListServiceAccountApplicationKeys
+      unstable: []
+      order: 0
+  - name: Create a service account
+    url: '#create-a-service-account'
+    identifier: create-a-service-account
+    parent: service-accounts
+    generated: true
+    params:
+      versions:
+        - v2
+      operationids:
+        - CreateServiceAccount
+      unstable: []
+      order: 1
